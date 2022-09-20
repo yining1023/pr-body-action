@@ -24,9 +24,8 @@ const run = async () => {
         body = body.replace(el, "<" + url + "|" + txt + ">");
       }
     }
-    body = body.replaceAll("-", "•");
+    body = body.replaceAll("- ", "• ");
     body = body.replaceAll("**", "*");
-    console.log("body", body);
     const output = {
       blocks: [
         {
@@ -38,7 +37,6 @@ const run = async () => {
         },
       ],
     };
-    console.log("JSON.stringify(output)", JSON.stringify(output));
     core.setOutput("body", JSON.stringify(output));
   } catch (error) {
     core.setFailed(error.message);
