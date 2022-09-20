@@ -24,8 +24,8 @@ const run = async () => {
         body = body.replace(el, "<" + url + "|" + txt + ">");
       }
     }
-    body = body.replace("- ", "• ");
-    body = body.replace("**", "*");
+    body = body.replaceAll("- ", "• ");
+    body = body.replaceAll("**", "*");
     const output = {
       blocks: [
         {
