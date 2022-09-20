@@ -16,8 +16,16 @@ const run = async () => {
       pull_number: prNumber,
     });
     const body = pr.body;
-    console.log("body", typeof body, body);
-    core.setOutput("body", body);
+    let elements = body.match(/\[.*?\)/g);
+    if (elements != null && elements.length > 0) {
+      for (el of elements) {
+        let txt = el.match(/\[(.*?)\]/)[1]; //get only the txt
+        let url = el.match(/\((.*?)\)/)[1]; //get only the link
+        body = body.replace(el, "<" + url + "|" + txt + ">");
+      }
+    }
+    console.log("body", typeof body, body, body.replace(/\r\n/g, "LINE_BREAK"));
+    core.setOutput("body", body.replace(/\r\n/g, "LINE_BREAK"));
   } catch (error) {
     core.setFailed(error.message);
   }
