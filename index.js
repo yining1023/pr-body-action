@@ -16,8 +16,8 @@ const run = async () => {
       pull_number: prNumber,
     });
     const body = pr.body;
-    console.log("body", typeof body, body, body.replace(/\n\r/g, "\\n\\r"));
-    core.setOutput("body", body.replace(/\n\r/g, "\\n\\r"));
+    console.log("body", typeof body, body, body.replace(/\n\r/g, ""));
+    core.setOutput("body", body.replace(/\n|\r/g, ""));
   } catch (error) {
     core.setFailed(error.message);
   }
