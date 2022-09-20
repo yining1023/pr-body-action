@@ -24,13 +24,19 @@ const run = async () => {
         body = body.replace(el, "<" + url + "|" + txt + ">");
       }
     }
-    console.log(
-      "body",
-      typeof body,
-      body,
-      body.replace(/\r|\n/g, "LINE_BREAK")
-    );
-    core.setOutput("body", body.replace(/\r|\n/g, "LINE_BREAK"));
+    const output = {
+      blocks: [
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: body,
+          },
+        },
+      ],
+    };
+    console.log("output", JSON.stringify(output));
+    core.setOutput("body", JSON.stringify(output));
   } catch (error) {
     core.setFailed(error.message);
   }
