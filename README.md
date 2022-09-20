@@ -8,6 +8,10 @@ This action get PR body by PR number
 
 **Required**
 
+## `GITHUB_TOKEN`
+
+**Required**
+
 ## Outputs
 
 ## `body`
@@ -19,7 +23,7 @@ PR body
 ```
 - name: Get PR Body
 id: get-pull-request-body
-uses: yining1023/pr-body-action@v1.1
+uses: yining1023/pr-body-action@v1.2
 with:
     pr-number: ${{steps.find-pull-request.outputs.number}}
     GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'

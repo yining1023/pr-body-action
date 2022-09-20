@@ -4,6 +4,9 @@ inputs:
   pr-number:
     description: "PR number"
     required: true
+  GITHUB_TOKEN:
+    description: "github token"
+    required: true
 outputs:
   body:
     description: "PR body"
