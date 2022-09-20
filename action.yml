@@ -1,0 +1,12 @@
+name: "PR Body"
+description: "Get PR body by PR number"
+inputs:
+  pr-number:
+    description: "PR number"
+    required: true
+outputs:
+  body:
+    description: "PR body"
+runs:
+  using: "node16"
+  main: "index.js"
