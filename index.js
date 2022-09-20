@@ -24,8 +24,13 @@ const run = async () => {
         body = body.replace(el, "<" + url + "|" + txt + ">");
       }
     }
-    console.log("body", typeof body, body, body.replace(/\r\n/g, "LINE_BREAK"));
-    core.setOutput("body", body.replace(/\r\n/g, "LINE_BREAK"));
+    console.log(
+      "body",
+      typeof body,
+      body,
+      body.replace(/\r|\n/g, "LINE_BREAK")
+    );
+    core.setOutput("body", body.replace(/\r|\n/g, "LINE_BREAK"));
   } catch (error) {
     core.setFailed(error.message);
   }
