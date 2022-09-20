@@ -15,7 +15,7 @@ const run = async () => {
       repo,
       pull_number: prNumber,
     });
-    const body = pr.body;
+    let body = pr.body;
     let elements = body.match(/\[.*?\)/g);
     if (elements != null && elements.length > 0) {
       for (el of elements) {
