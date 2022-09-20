@@ -17,7 +17,7 @@ const run = async () => {
     });
     const body = pr.body;
     console.log("body", typeof body, body);
-    core.setOutput("body", body);
+    core.setOutput("body", JSON.stringify(body));
   } catch (error) {
     core.setFailed(error.message);
   }
