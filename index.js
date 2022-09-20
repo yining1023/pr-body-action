@@ -16,7 +16,7 @@ const run = async () => {
       pull_number: prNumber,
     });
     const body = pr.body;
-
+    console.log("body", typeof body, body);
     core.setOutput("body", body);
   } catch (error) {
     core.setFailed(error.message);
