@@ -29,11 +29,18 @@ const run = async () => {
     const output = {
       blocks: [
         {
-          type: "section",
-          text: {
-            type: "mrkdwn",
-            text: body,
-          },
+          type: "rich_text",
+          elements: [
+            {
+              type: "rich_text_section",
+              elements: [
+                {
+                  type: "text",
+                  text: body,
+                },
+              ],
+            },
+          ],
         },
       ],
     };
