@@ -16,11 +16,11 @@ const run = async () => {
       pull_number: prNumber,
     });
     let body = pr.body;
-    let elements = body.match(/\[.*?\]\(.*?\)/g);
+    let elements = body.match(/\[.*\]\(.*\)/g);
     if (elements != null && elements.length > 0) {
       for (el of elements) {
-        let txt = el.match(/\[(.*?)\]/)[1]; //get only the txt
-        let url = el.match(/\((.*?)\)/)[1]; //get only the link
+        let txt = el.match(/\[(.*)\]/)[1]; //get only the txt
+        let url = el.match(/\]\((.*)\)/)[1]; //get only the link
         body = body.replace(el, "<" + url + "|" + txt + ">");
       }
     }
