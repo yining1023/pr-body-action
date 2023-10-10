@@ -16,15 +16,20 @@ const run = async () => {
       pull_number: prNumber,
     });
     let body = pr.body;
+
+    // Ensure <> don't mess with links
+    body = body.replaceAll("<", "‹");
+    body = body.replaceAll(">", "›");
+
     let elements = body.match(/\[.*\]\(.*\)/g);
     if (elements != null && elements.length > 0) {
       for (el of elements) {
         let txt = el.match(/\[(.*)\]/)[1]; //get only the txt
         let url = el.match(/\]\((.*)\)/)[1]; //get only the link
-        body = body.replace(el, "<" + url + "|" + txt + ">");
+        body = body.replace(el, "<" + url.trim() + "|" + txt.trim() + ">");
       }
     }
-    body = body.replaceAll("- ", "• ");
+    body = body.replaceAll("^- ", "• ");
     body = body.replaceAll("**", "*");
 
     // Split body into chunks of so that we don't reach the Slack API limit of 3000 characters
