@@ -26,24 +26,22 @@ const run = async () => {
     }
     body = body.replaceAll("- ", "• ");
     body = body.replaceAll("**", "*");
+
+    // Split body into chunks of so that we don't reach the Slack API limit of 3000 characters
+    const bodyChunks = body.split("\n\n");
     const output = {
-      blocks: [
-        {
-          type: "rich_text",
-          elements: [
-            {
-              type: "rich_text_section",
-              elements: [
-                {
-                  type: "text",
-                  text: body,
-                },
-              ],
-            },
-          ],
-        },
-      ],
+      blocks: [],
     };
+    for (let i = 0; i < bodyChunks.length; i++) {
+      output.blocks.push({
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: bodyChunks[i],
+        },
+      });
+    }
+
     core.setOutput("body", JSON.stringify(output));
   } catch (error) {
     core.setFailed(error.message);
